@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Prodi;
+use App\Models\Mahasiswa;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,5 +24,27 @@ class DatabaseSeeder extends Seeder
         ]);
 
         prodi::factory(10)->create();
+
+        Mahasiswa::create([
+            'nim' => 'E123123',
+            'nama' => 'Effan',
+            'no_hp' => '085221078887',
+            'alamat' => 'Benua Anyar',
+            'foto' => 'effan.jpg',
+            'password' => '123',
+            'prodi_id' => 1,
+        ]);
+
+        Mahasiswa::create([
+            'nim' => 'E123124',
+            'nama' => 'Najwaini',
+            'no_hp' => '123',
+            'alamat' => 'Benua Anyar',
+            'foto' => 'effan.jpg',
+            'password' => '123',
+            'prodi_id' => 2,
+        ]);
+
+        Mahasiswa::factory(100)->create();
     }
 }
