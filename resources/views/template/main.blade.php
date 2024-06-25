@@ -57,9 +57,10 @@
       
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="logout.php">
-          Logout<i class="fas fa-sign-out-alt"></i> 
-        </a>
+        <form action="/logout" method="post">
+          @csrf
+          <button type="submit" class="btn btn-link">Logout <i class="fas fa-sign-out-alt"></i></button>
+        </form>
       </li>
     </ul>
   </nav>

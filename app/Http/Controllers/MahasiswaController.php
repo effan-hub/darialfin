@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Prodi;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
@@ -16,9 +17,8 @@ class MahasiswaController extends Controller
     public function index()
     {
         //
-        $data = ['nama' => 'hitler', 'foto' => 'opp.jpeg'];
         $mahasiswa = Mahasiswa::with('prodi')->get();
-        return view('mahasiswa.index', compact(['data', 'mahasiswa']));
+        return view('mahasiswa.index', compact(['mahasiswa']));
     }
 
     /**
@@ -27,9 +27,8 @@ class MahasiswaController extends Controller
     public function create()
     {
         //
-        $data = ['nama' => 'hitler', 'foto' => 'opp.jpeg'];
         $prodi = Prodi::all();
-        return view('mahasiswa.create', compact(['data', 'prodi']));
+        return view('mahasiswa.create', compact(['prodi']));
     }
 
     /**
@@ -62,8 +61,14 @@ class MahasiswaController extends Controller
         if ($request->file('foto')) {
             $validateData['foto'] = $request->file('foto')->store('images');
         }
-        $validateData['password'] = Hash::make($validateData['nim']);
+        $user = ([
+            'user' => $validateData['nim'],
+            'password' => Hash::make($validateData['nim']),
+            'role' => 'mahasiswa'
+
+        ]);
         Mahasiswa::create($validateData);
+        User::create($user);
         return redirect('/mahasiswa');
     }
 
@@ -81,10 +86,9 @@ class MahasiswaController extends Controller
     public function edit(string $id)
     {
         //
-        $data = ['nama' => 'hitler', 'foto' => 'opp.jpeg'];
         $mahasiswa = Mahasiswa::find($id);
         $prodi = Prodi::all();
-        return view('mahasiswa.edit', compact(['data', 'mahasiswa', 'prodi']));
+        return view('mahasiswa.edit', compact(['mahasiswa', 'prodi']));
     }
 
     /**
@@ -122,7 +126,6 @@ class MahasiswaController extends Controller
             }
             $validateData['foto'] = $request->file('foto')->store('images');
         }
-        $validateData['password'] = Hash::make($validateData['nim']);
         Mahasiswa::where('nim', $id)->update($validateData);
         return redirect('/mahasiswa');
     }
@@ -138,6 +141,7 @@ class MahasiswaController extends Controller
             Storage::delete($mahasiswa->foto);
         }
         Mahasiswa::destroy($id);
+        User::where('user', $id)->delete();
         flash()->success('Data Berhasil dihapus');
         return redirect('/mahasiswa');
     }

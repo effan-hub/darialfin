@@ -15,15 +15,13 @@ class ProdiController extends Controller
 {
     public function index()
     {
-        $data = ['nama' => 'hitler', 'foto' =>'opp.jpeg'];
         $prodi = Prodi::all();
-        return view('prodi.index', compact ('data', 'prodi')); 
+        return view('prodi.index', compact ('prodi')); 
     }
 
     public function create()
     {
-        $data = ['nama' => 'hitler', 'foto' =>'opp.jpeg'];
-        return view('prodi.create', compact(['data']));
+        return view('prodi.create');
     }
 
     public function store(Request $request)
@@ -45,9 +43,8 @@ class ProdiController extends Controller
 
     public function edit(String $id)
     {
-        $data = ['nama' => 'hitler', 'foto' =>'opp.jpeg'];
         $prodi = Prodi::find($id);
-        return view('prodi.edit', compact(['data', 'prodi']));
+        return view('prodi.edit', compact(['prodi']));
     }
 
     public function update(Request $request, string $id)

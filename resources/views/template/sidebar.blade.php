@@ -11,11 +11,11 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3">
             <div class="image">
-                <img src="{{ asset('dist/img/' . $data['foto']) }}" class="img-circle elevation-2"
+                <img src="{{ asset(session('foto')) }}" class="img-circle elevation-2"
                     style="width:100px; height:100px" alt="User Image">
             </div>
             <div class="info justify-content-center">
-                <a href="#" class="d-block">{{ $data['nama'] }}</a>
+                <a href="#" class="d-block">{{ session('nama') }}</a>
             </div>
         </div>
 
@@ -32,7 +32,6 @@
                         <i class="nav-icon far fa-image"></i>
                         <p>
                             Dashboard
-                            <span class="badge badge-info right">2</span>
                         </p>
                     </a>
                 </li>
@@ -42,7 +41,6 @@
                         <i class="nav-icon far fa-calendar-alt"></i>
                         <p>
                             Data Mahasiswa
-                            <span class="badge badge-info right">2</span>
                         </p>
                     </a>
                 </li>
