@@ -29,11 +29,11 @@
                             <div class="card-header">
                                 <h3 class="card-title">Data Mahasiswa</h3>
 
-                                <div class="card-tools">
+                                @can('admin')
                                     <div class="card-tools">
                                         <a href="/mahasiswa/create" class="btn btn-warning">Tambah</a>
                                     </div>
-                                </div>
+                                @endcan
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body table-responsive p-0">
@@ -47,7 +47,9 @@
                                             <th>No Handphone</th>
                                             <th>alamat</th>
                                             <th>foto</th>
-                                            <th>aksi</th>
+                                            @can('admin')
+                                                <th>aksi</th>
+                                            @endcan
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -59,14 +61,20 @@
                                                 <td>{{ $m->prodi->nama_prodi }}</td>
                                                 <td>{{ $m->no_hp }}</td>
                                                 <td>{{ $m->alamat }}</td>
-                                                <td> <img src="{{ asset('storage/' . $m->foto) }}" width="100px" height="100px" /> </td>
-                                                <td><a href="{{ url("mahasiswa/$m->nim/edit") }}" class="btn btn-primary">Edit</a>
-                                                    <form action="{{ url("mahasiswa/$m->nim") }}" method="post" class="d-inline">
-                                                        @method('delete')
-                                                        @csrf
-                                                        <button class="btn btn-danger" onclick="return confirm('Yakin mau delete?')">Hapus</button>
-                                                    </form>
-                                                </td>
+                                                <td> <img src="{{ asset('storage/' . $m->foto) }}" width="100px"
+                                                        height="100px" /> </td>
+                                                @can('admin')
+                                                    <td><a href="{{ url("mahasiswa/$m->nim/edit") }}"
+                                                            class="btn btn-primary">Edit</a>
+                                                        <form action="{{ url("mahasiswa/$m->nim") }}" method="post"
+                                                            class="d-inline">
+                                                            @method('delete')
+                                                            @csrf
+                                                            <button class="btn btn-danger"
+                                                                onclick="return confirm('Yakin mau delete?')">Hapus</button>
+                                                        </form>
+                                                    </td>
+                                                @endcan
                                             </tr>
                                         @endforeach
                                     </tbody>
