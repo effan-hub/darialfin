@@ -64,18 +64,18 @@
                                                 <td>{{ $m->alamat }}</td>
                                                 <td> <img src="{{ asset('storage/' . $m->foto) }}" width="100px"
                                                         height="100px" /> </td>
-                                                @can('admin')
-                                                    <td><a href="{{ url("mahasiswa/$m->nim/edit") }}"
-                                                            class="btn btn-primary">Edit</a>
-                                                        <form action="{{ url("mahasiswa/$m->nim") }}" method="post"
-                                                            class="d-inline">
-                                                            @method('delete')
-                                                            @csrf
-                                                            <button class="btn btn-danger"
-                                                                onclick="return confirm('Yakin mau delete?')">Hapus</button>
-                                                        </form>
-                                                    </td>
-                                                @endcan
+
+                                                <td><a href="{{ url("mahasiswa/$m->nim/edit") }}"
+                                                        class="btn btn-primary">Edit</a>
+                                                    <form action="{{ url("mahasiswa/$m->nim") }}" method="post"
+                                                        class="d-inline">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <button class="btn btn-danger"
+                                                            onclick="return confirm('Yakin mau delete?')">Hapus</button>
+                                                    </form>
+                                                </td>
+
                                             </tr>
                                         @endforeach
                                     </tbody>
